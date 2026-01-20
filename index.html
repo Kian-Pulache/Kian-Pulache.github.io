@@ -3,407 +3,995 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Andy Pulache Puescas</title>
+    <title>Andy Pulache - Ingeniero Ambiental & Desarrollador</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+
         :root {
-            --color-dark-bg: #213341;
-            --color-dark-text: #F5E7E4;
-            --color-dark-secondary: #D2BEBF;
-            --color-light-bg: #F5E7E4;
-            --color-light-text: #213341;
-            --color-light-secondary: #AFA7B2;
-            --primary-color: #049CB3;
+            --bg-light: #FAFAFA;
+            --text-light: #0A0A0A;
+            --text-secondary-light: #666;
+            --accent-light: #049CB3;
+            --accent-green: #06D6A0;
+            --card-bg-light: #FFFFFF;
+            
+            --bg-dark: #0A0A0A;
+            --text-dark: #FAFAFA;
+            --text-secondary-dark: #A0A0A0;
+            --accent-dark: #049CB3;
+            --accent-green-dark: #06D6A0;
+            --card-bg-dark: #1A1A1A;
         }
 
-        body.light-mode {
-            background-color: var(--color-light-bg);
-            color: var(--color-light-text);
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
 
-        body.dark-mode {
-            background-color: var(--color-dark-bg);
-            color: var(--color-dark-text);
+        /* Cursor por defecto - Modo Claro */
+        body.light-mode,
+        body.light-mode * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="black" stroke="white" stroke-width="1.2" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35z"/></svg>'), auto;
+        }
+
+        /* Cursor por defecto - Modo Oscuro */
+        body.dark-mode,
+        body.dark-mode * {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" stroke="black" stroke-width="1.2" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35z"/></svg>'), auto;
+        }
+
+        /* Cursor hover también como flechita - Modo Claro */
+        body.light-mode a,
+        body.light-mode button,
+        body.light-mode .project-card,
+        body.light-mode .hobby-card,
+        body.light-mode .social-link {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="black" stroke="white" stroke-width="1.2" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35z"/></svg>'), auto !important;
+        }
+
+        /* Cursor hover también como flechita - Modo Oscuro */
+        body.dark-mode a,
+        body.dark-mode button,
+        body.dark-mode .project-card,
+        body.dark-mode .hobby-card,
+        body.dark-mode .social-link {
+            cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="white" stroke="black" stroke-width="1.2" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86a.5.5 0 0 1 .35-.15h6.87a.5.5 0 0 0 .35-.85L6.35 2.85a.5.5 0 0 0-.85.35z"/></svg>'), auto !important;
         }
 
         body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            transition: background-color 0.3s, color 0.3s;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: var(--bg-light);
+            color: var(--text-light);
+            transition: background 0.4s cubic-bezier(0.4, 0, 0.2, 1), color 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow-x: hidden;
+            line-height: 1.6;
         }
 
-        header {
-            padding: 1rem 0;
-            text-align: center;
+        body.dark-mode {
+            background: var(--bg-dark);
+            color: var(--text-dark);
         }
 
-        header h1 {
-            font-size: 2.5rem;
-        }
-
-        .theme-toggle {
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            background-color: var(--primary-color);
-            border: none;
-            border-radius: 50%;
-            padding: 0.5rem;
-            cursor: pointer;
-            font-size: 1.5rem;
-            color: white;
-        }
-
+        /* Navigation */
         nav {
-            text-align: center;
-            margin: 1rem 0;
-        }
-
-        nav a {
-            margin: 0 1rem;
-            text-decoration: none;
-            color: var(--primary-color);
-            font-size: 1.2rem;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 2rem auto;
-            padding: 0 2rem;
-        }
-
-        .section {
-            margin-bottom: 2rem;
-        }
-
-        .section h2 {
-            border-bottom: 2px solid var(--primary-color);
-            padding-bottom: 0.5rem;
-        }
-
-        /* Proyectos */
-        .projects {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .project-card {
-            flex: 1 1 calc(33% - 1rem);
-            background-color: var(--color-light-secondary);
-            border: 1px solid var(--primary-color);
-            padding: 1rem;
-            transition: transform 0.3s;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .project-card h3 {
-            color: var(--primary-color);
-        }
-
-        .project-card:hover {
-            transform: scale(1.05);
-        }
-
-        .project-card a {
-            color: var(--primary-color);
-            text-decoration: none;
-        }
-
-        /* Pasatiempos */
-        .hobbies-grid {
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-
-        .hobby {
-            flex: 1 1 calc(33% - 1rem);
-            background-color: var(--color-light-secondary);
-            border: 1px solid var(--primary-color);
-            text-align: center;
-            padding: 1rem;
-            transition: transform 0.3s;
-            cursor: pointer;
-        }
-
-        .hobby:hover {
-            transform: scale(1.05);
-        }
-
-        .hobby img {
-            max-width: 100%;
-            border-radius: 5px;
-        }
-
-        /* Modal */
-        .modal {
-            display: none;
             position: fixed;
             top: 0;
             left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
+            right: 0;
+            z-index: 100;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(255, 255, 255, 0.8);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
         }
 
-        .modal-content {
+        body.dark-mode nav {
+            background: rgba(10, 10, 10, 0.8);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: inherit;
+            font-weight: 500;
+            font-size: 0.95rem;
+            transition: opacity 0.3s ease;
             position: relative;
-            background: var(--color-light-bg);
-            padding: 1rem;
-            max-width: 350px; /* Modificar aqui para el tamaño del cuadro de pasatiempos */
-            width: 90%;       /* Modificar aqui para el tamaño del cuadro de pasatiempos */
-            text-align: left;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
         }
 
-        .modal img {
-            max-width: 100%;
-            border-radius: 10px;
-            margin-bottom: 1rem;
+        .nav-links a:hover {
+            opacity: 0.6;
         }
 
-        .modal h3 {
-            margin-top: 0;
-            color: var(--primary-color);
-            font-size: 1.5rem;
-        }
-
-        .modal p {
-            font-size: 1rem;
-            line-height: 1.5;
-            color: var(--color-dark-text);
-            margin-top: 0.5rem;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: -20px; /* Hace que el botón sobresalga verticalmente */
-            right: -20px; /* Hace que el botón sobresalga horizontalmente */
-            background-color: var(--primary-color);
-            color: white;
+        .theme-toggle {
+            background: none;
             border: none;
+            font-size: 1.3rem;
+            cursor: pointer;
+            color: inherit;
+            padding: 0.5rem;
             border-radius: 50%;
-            width: 50px;
-            height: 50px;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            opacity: 0.8; /* Botón semi-transparente */
-            transition: opacity 0.3s, transform 0.3s;
         }
 
-        .close-modal:hover {
-            opacity: 1;
+        .theme-toggle:hover {
+            background: rgba(128, 128, 128, 0.1);
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 1200px;
+            width: 100%;
+        }
+
+        .hero-title {
+            font-size: clamp(3rem, 10vw, 7rem);
+            font-weight: 900;
+            line-height: 1.1;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-subtitle {
+            font-size: clamp(1.5rem, 4vw, 2.5rem);
+            font-weight: 600;
+            color: var(--text-secondary-light);
+            margin-bottom: 2rem;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.2s forwards;
+        }
+
+        body.dark-mode .hero-subtitle {
+            color: var(--text-secondary-dark);
+        }
+
+        .hero-description {
+            font-size: 1.2rem;
+            color: var(--text-secondary-light);
+            max-width: 700px;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 1s ease 0.4s forwards;
+        }
+
+        body.dark-mode .hero-description {
+            color: var(--text-secondary-dark);
+        }
+
+        .accent {
+            color: var(--accent-light);
+        }
+
+        body.dark-mode .accent {
+            color: var(--accent-dark);
+        }
+
+        .accent-green {
+            color: var(--accent-green);
+        }
+
+        body.dark-mode .accent-green {
+            color: var(--accent-green-dark);
+        }
+
+        /* Section */
+        .section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 3rem;
+            letter-spacing: -0.03em;
+        }
+
+        /* Projects Grid */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .project-card {
+            background: var(--card-bg-light);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            cursor: pointer;
+        }
+
+        body.dark-mode .project-card {
+            background: var(--card-bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .project-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, var(--accent-light), #06D6A0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            transition: all 0.4s ease;
+        }
+
+        .project-card:hover .project-image {
+            transform: scale(1.05);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+
+        .project-description {
+            color: var(--text-secondary-light);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        body.dark-mode .project-description {
+            color: var(--text-secondary-dark);
+        }
+
+        .project-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--accent-light);
+            text-decoration: none;
+            font-weight: 600;
+            transition: gap 0.3s ease;
+        }
+
+        body.dark-mode .project-link {
+            color: var(--accent-dark);
+        }
+
+        .project-link:hover {
+            gap: 1rem;
+        }
+
+        /* Hobbies */
+        .hobbies-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+
+        .hobby-card {
+            aspect-ratio: 1;
+            background: var(--card-bg-light);
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        body.dark-mode .hobby-card {
+            background: var(--card-bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .hobby-card:hover {
+            transform: scale(1.02);
+        }
+
+        .hobby-icon {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 5rem;
+            background: linear-gradient(135deg, var(--accent-light), #06D6A0);
+            transition: all 0.4s ease;
+        }
+
+        .hobby-card:hover .hobby-icon {
             transform: scale(1.1);
         }
 
-        .close-modal i {
-            margin: 0;
+        .hobby-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 2rem;
+            background: linear-gradient(to top, rgba(0,0,0,0.9), transparent);
+            color: white;
+            transform: translateY(100%);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
 
-        /* Contacto */
-        .contact-container {
+        .hobby-card:hover .hobby-overlay {
+            transform: translateY(0);
+        }
+
+        .hobby-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+            margin-top: 4rem;
+        }
+
+        .about-image {
+            width: 100%;
+            aspect-ratio: 1;
+            border-radius: 20px;
+            background: linear-gradient(135deg, var(--accent-light), #06D6A0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 8rem;
+            overflow: hidden;
+        }
+
+        .about-text p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            color: var(--text-secondary-light);
+            margin-bottom: 1.5rem;
+        }
+
+        body.dark-mode .about-text p {
+            color: var(--text-secondary-dark);
+        }
+
+        /* Contact */
+        .contact-content {
+            text-align: center;
+            max-width: 800px;
+            margin: 4rem auto;
+        }
+
+        .contact-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            margin-bottom: 2rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 3rem;
+        }
+
+        .social-link {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: var(--card-bg-light);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            color: var(--accent-light);
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        body.dark-mode .social-link {
+            background: var(--card-bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            color: var(--accent-dark);
+        }
+
+        .social-link:hover {
+            transform: translateY(-5px);
+            background: var(--accent-light);
+            color: white;
+            border-color: var(--accent-light);
+        }
+
+        body.dark-mode .social-link:hover {
+            background: var(--accent-dark);
+            color: white;
+            border-color: var(--accent-dark);
+        }
+
+        /* Footer */
+        footer {
+            padding: 3rem 5%;
+            text-align: center;
+            color: var(--text-secondary-light);
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        body.dark-mode footer {
+            color: var(--text-secondary-dark);
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        /* Experience Timeline */
+        .timeline {
+            max-width: 900px;
+            margin: 4rem auto;
+            position: relative;
+            padding-left: 3rem;
+        }
+
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: linear-gradient(to bottom, var(--accent-light), var(--accent-green));
+        }
+
+        body.dark-mode .timeline::before {
+            background: linear-gradient(to bottom, var(--accent-dark), var(--accent-green-dark));
+        }
+
+        .timeline-item {
+            position: relative;
+            margin-bottom: 3rem;
+            padding-left: 2rem;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -3.5rem;
+            top: 0;
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: var(--accent-light);
+            border: 3px solid var(--bg-light);
+            box-shadow: 0 0 0 4px var(--card-bg-light);
+        }
+
+        body.dark-mode .timeline-item::before {
+            background: var(--accent-dark);
+            border-color: var(--bg-dark);
+            box-shadow: 0 0 0 4px var(--card-bg-dark);
+        }
+
+        .timeline-item:nth-child(even)::before {
+            background: var(--accent-green);
+        }
+
+        body.dark-mode .timeline-item:nth-child(even)::before {
+            background: var(--accent-green-dark);
+        }
+
+        .timeline-content {
+            background: var(--card-bg-light);
+            border: 1px solid rgba(0, 0, 0, 0.06);
+            border-radius: 12px;
+            padding: 2rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .timeline-content {
+            background: var(--card-bg-dark);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .timeline-content:hover {
+            transform: translateX(10px);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        body.dark-mode .timeline-content:hover {
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            padding: 0.4rem 1rem;
+            background: var(--accent-light);
+            color: white;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .timeline-item:nth-child(even) .timeline-date {
+            background: var(--accent-green);
+        }
+
+        .timeline-title {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-subtitle {
+            color: var(--text-secondary-light);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        body.dark-mode .timeline-subtitle {
+            color: var(--text-secondary-dark);
+        }
+
+        .timeline-description {
+            color: var(--text-secondary-light);
+            line-height: 1.7;
+        }
+
+        body.dark-mode .timeline-description {
+            color: var(--text-secondary-dark);
+        }
+
+        .timeline-skills {
             display: flex;
             flex-wrap: wrap;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .contact-container img {
-            max-width: 150px;
-            border-radius: 50%;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        }
-
-        .contact-text {
-            flex: 1;
-        }
-
-        .social-icons {
-            display: flex;
-            gap: 1rem;
+            gap: 0.5rem;
             margin-top: 1rem;
         }
 
-        .social-icons a {
-            font-size: 1.5rem;
-            color: var(--primary-color);
-            text-decoration: none;
+        .skill-tag {
+            padding: 0.4rem 1rem;
+            background: rgba(4, 156, 179, 0.1);
+            color: var(--accent-light);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 500;
         }
 
-        footer {
-            text-align: center;
-            margin-top: 2rem;
-            padding: 1rem 0;
+        body.dark-mode .skill-tag {
+            background: rgba(4, 156, 179, 0.2);
+            color: var(--accent-dark);
         }
 
-        footer p {
-            margin: 0;
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .nav-links a {
+                font-size: 0.85rem;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .projects-grid,
+            .hobbies-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 4rem 5%;
+            }
+
+            .timeline {
+                padding-left: 2rem;
+            }
+
+            .timeline-item {
+                padding-left: 1.5rem;
+            }
+
+            .timeline-item::before {
+                left: -2.5rem;
+            }
         }
     </style>
 </head>
 <body class="light-mode">
-    <header>
-        <h1>Andy Samir Pulache Puescas</h1>
-        <p>Ingeniero Ambiental y Programador</p>
-    </header>
-
-    <!-- Botón de modo claro/oscuro -->
-    <button class="theme-toggle" id="themeToggle">
-        <i class="fas fa-moon"></i>
-    </button>
-
+    <!-- Navigation -->
     <nav>
-        <a href="#sobre-mi">Sobre mí</a>
-        <a href="#proyectos">Proyectos</a>
-        <a href="#hobbies">Pasatiempos</a>
-        <a href="#contacto">Contacto</a>
+        <div class="logo">Andy Pulache</div>
+        <div class="nav-links">
+            <a href="#sobre-mi">Sobre mí</a>
+            <a href="#experiencia">Experiencia</a>
+            <a href="#proyectos">Proyectos</a>
+            <a href="#hobbies">Pasatiempos</a>
+            <a href="#contacto">Contacto</a>
+            <button class="theme-toggle" id="themeToggle">
+                <i class="fas fa-moon"></i>
+            </button>
+        </div>
     </nav>
 
-    <div class="container">
-        <section id="sobre-mi" class="section">
-            <h2>Sobre mí</h2>
-            <p>Soy un ingeniero ambiental y programador apasionado por la sostenibilidad y la tecnología. Me especializo en encontrar soluciones innovadoras a problemas ambientales a través de la programación.</p>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="accent-green">Ingeniero Ambiental</span><br>
+                & <span class="accent">Desarrollador</span>
+            </h1>
+            <p class="hero-subtitle">
+                Creando soluciones sostenibles a través de la tecnología
+            </p>
+            <p class="hero-description">
+                Combino mi pasión por el medio ambiente con el poder de la programación 
+                para desarrollar herramientas innovadoras que marcan la diferencia.
+            </p>
+        </div>
+    </section>
 
-        <section id="proyectos" class="section">
-            <h2>Proyectos</h2>
-            <div class="projects">
-                <div class="project-card">
-                    <h3>Kurt Beer IA</h3>
-                    <p>Una app para la identificación de especies en el parque ecológico Kurt Beer.</p>
-                    <a href="https://github.com/tu-repositorio" target="_blank">Ver en GitHub</a>
-                </div>
-                <div class="project-card">
-                    <h3>MecaFlo</h3>
-                    <p>Un programa para cálculos basado en el libro "Mecánica de Fluidos" 6ta edición - Robert Mott.</p>
-                    <a href="https://github.com/tu-repositorio" target="_blank">Ver en GitHub</a>
-                </div>
-                <div class="project-card">
-                    <h3>Mapas temáticos</h3>
-                    <p>Una colección de mapas temáticos.</p>
-                    <a href="https://github.com/tu-repositorio" target="_blank">Ver en GitHub</a>
-                </div>
+    <!-- About Section -->
+    <section id="sobre-mi" class="section fade-in">
+        <h2 class="section-title">Sobre mí</h2>
+        <div class="about-content">
+            <div class="about-image">👨‍💻</div>
+            <div class="about-text">
+                <p style="font-size: 1.3rem; line-height: 1.9; font-weight: 500;">
+                    Ingeniero ambiental y desarrollador apasionado por crear soluciones tecnológicas 
+                    que generen un impacto positivo en el medio ambiente. Combino análisis de datos, 
+                    programación y gestión ambiental para enfrentar los desafíos del siglo XXI.
+                </p>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="hobbies" class="section">
-            <h2>Pasatiempos</h2>
-            <div class="hobbies-grid">
-                <div class="hobby" data-hobby="buceo">
-                    <img src="https://via.placeholder.com/150" alt="Buceo">
-                    <h3>Buceo</h3>
-                </div>
-                <div class="hobby" data-hobby="ciclismo">
-                    <img src="https://via.placeholder.com/150" alt="Ciclismo">
-                    <h3>Ciclismo</h3>
-                </div>
-                <div class="hobby" data-hobby="programacion">
-                    <img src="https://via.placeholder.com/150" alt="Programación">
-                    <h3>Programación</h3>
-                </div>
-            </div>
-        </section>
-
-        <section id="contacto" class="section">
-            <h2>Contacto</h2>
-            <div class="contact-container">
-                <img src="https://via.placeholder.com/150" alt="Foto de [Tu Nombre]">
-                <div class="contact-text">
-                    <p>Puedes ver más sobre mí y contactarme mediante mis redes sociales.</p>
-                    <div class="social-icons">
-                        <a href="https://pe.linkedin.com/in/andy-pulache-puescas-967a54173" target="_blank"><i class="fab fa-linkedin"></i></a>
-                        <a href="mailto:andy5pulache.puescas@gmail.com"><i class="fas fa-envelope"></i></a>
-                        <a href="https://wa.me/+5190000000" target="_blank"><i class="fab fa-whatsapp"></i></a>
-                        <a href="https://www.instagram.com/kian_pulache/" target="_blank"><i class="fab fa-instagram"></i></a>
-                        <a href="https://www.facebook.com/kian.pulachepuescas" target="_blank"><i class="fab fa-facebook"></i></a>
-                        <a href="https://github.com/Kian-Pulache" target="_blank"><i class="fab fa-github"></i></a>
+    <!-- Experience & Education Section -->
+    <section id="experiencia" class="section fade-in">
+        <h2 class="section-title">Experiencia & Educación</h2>
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="timeline-date">2020 - Presente</span>
+                    <h3 class="timeline-title">Ingeniero Ambiental & Desarrollador</h3>
+                    <p class="timeline-subtitle">Freelance / Proyectos Independientes</p>
+                    <p class="timeline-description">
+                        Desarrollo de soluciones tecnológicas enfocadas en sostenibilidad ambiental. 
+                        Creación de herramientas de análisis de datos ambientales y aplicaciones para 
+                        la conservación de ecosistemas.
+                    </p>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Python</span>
+                        <span class="skill-tag">JavaScript</span>
+                        <span class="skill-tag">GIS</span>
+                        <span class="skill-tag">Machine Learning</span>
                     </div>
                 </div>
             </div>
-        </section>
-    </div>
 
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="timeline-date">2019 - 2020</span>
+                    <h3 class="timeline-title">Proyecto Kurt Beer IA</h3>
+                    <p class="timeline-subtitle">Desarrollo e Investigación</p>
+                    <p class="timeline-description">
+                        Implementación de sistema de visión por computadora para identificación 
+                        automática de especies en el parque ecológico Kurt Beer, mejorando los 
+                        procesos de monitoreo ambiental.
+                    </p>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Computer Vision</span>
+                        <span class="skill-tag">TensorFlow</span>
+                        <span class="skill-tag">Biodiversidad</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="timeline-date">2015 - 2020</span>
+                    <h3 class="timeline-title">Ingeniería Ambiental</h3>
+                    <p class="timeline-subtitle">Universidad [Tu Universidad]</p>
+                    <p class="timeline-description">
+                        Formación profesional en gestión ambiental, evaluación de impacto ambiental, 
+                        tratamiento de aguas y gestión de residuos. Especialización en el uso de 
+                        tecnologías para soluciones sostenibles.
+                    </p>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Gestión Ambiental</span>
+                        <span class="skill-tag">Hidráulica</span>
+                        <span class="skill-tag">Sostenibilidad</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="timeline-item">
+                <div class="timeline-content">
+                    <span class="timeline-date">2018</span>
+                    <h3 class="timeline-title">Certificación en Programación</h3>
+                    <p class="timeline-subtitle">Autodidacta / Cursos Online</p>
+                    <p class="timeline-description">
+                        Formación continua en desarrollo de software, análisis de datos y 
+                        aplicaciones web. Enfoque en tecnologías aplicadas a problemas ambientales.
+                    </p>
+                    <div class="timeline-skills">
+                        <span class="skill-tag">Full Stack</span>
+                        <span class="skill-tag">Data Analysis</span>
+                        <span class="skill-tag">APIs</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="proyectos" class="section fade-in">
+        <h2 class="section-title">Proyectos destacados</h2>
+        <div class="projects-grid">
+            <div class="project-card">
+                <div class="project-image">🌿</div>
+                <div class="project-content">
+                    <h3 class="project-title">Kurt Beer IA</h3>
+                    <p class="project-description">
+                        Aplicación inteligente para la identificación de especies en el parque ecológico Kurt Beer utilizando visión por computadora.
+                    </p>
+                    <a href="#" class="project-link">
+                        Ver proyecto <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">💧</div>
+                <div class="project-content">
+                    <h3 class="project-title">MecaFlo</h3>
+                    <p class="project-description">
+                        Programa avanzado para cálculos de mecánica de fluidos basado en el libro de Robert Mott. Optimiza procesos de ingeniería hidráulica.
+                    </p>
+                    <a href="#" class="project-link">
+                        Ver proyecto <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-image">🗺️</div>
+                <div class="project-content">
+                    <h3 class="project-title">Mapas Temáticos</h3>
+                    <p class="project-description">
+                        Colección de visualizaciones geoespaciales interactivas para análisis ambiental y territorial utilizando datos abiertos.
+                    </p>
+                    <a href="#" class="project-link">
+                        Ver proyecto <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Hobbies Section -->
+    <section id="hobbies" class="section fade-in">
+        <h2 class="section-title">Pasatiempos</h2>
+        <div class="hobbies-grid">
+            <div class="hobby-card">
+                <div class="hobby-icon">🤿</div>
+                <div class="hobby-overlay">
+                    <h3 class="hobby-title">Buceo</h3>
+                    <p>Explorando el mundo submarino y sus ecosistemas fascinantes</p>
+                </div>
+            </div>
+
+            <div class="hobby-card">
+                <div class="hobby-icon">🚴</div>
+                <div class="hobby-overlay">
+                    <h3 class="hobby-title">Ciclismo</h3>
+                    <p>Manteniéndome activo mientras disfruto de la naturaleza</p>
+                </div>
+            </div>
+
+            <div class="hobby-card">
+                <div class="hobby-icon">💻</div>
+                <div class="hobby-overlay">
+                    <h3 class="hobby-title">Programación</h3>
+                    <p>Creando soluciones tecnológicas para problemas reales</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contacto" class="section fade-in">
+        <div class="contact-content">
+            <h2 class="contact-title">¿Trabajamos juntos?</h2>
+            <p style="font-size: 1.2rem; color: var(--text-secondary-light); margin-bottom: 1rem;">
+                Estoy siempre abierto a nuevos proyectos y colaboraciones
+            </p>
+            <div class="social-links">
+                <a href="https://pe.linkedin.com/in/andy-pulache-puescas-967a54173" target="_blank" class="social-link">
+                    <i class="fab fa-linkedin"></i>
+                </a>
+                <a href="mailto:andy5pulache.puescas@gmail.com" class="social-link">
+                    <i class="fas fa-envelope"></i>
+                </a>
+                <a href="https://wa.me/+5190000000" target="_blank" class="social-link">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+                <a href="https://www.instagram.com/kian_pulache/" target="_blank" class="social-link">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/kian.pulachepuescas" target="_blank" class="social-link">
+                    <i class="fab fa-facebook"></i>
+                </a>
+                <a href="https://github.com/Kian-Pulache" target="_blank" class="social-link">
+                    <i class="fab fa-github"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
     <footer>
-        <p>&copy; 2024 Andy Pulache. Todos los derechos reservados.</p>
+        <p>&copy; 2024 Andy Pulache Puescas. Todos los derechos reservados.</p>
     </footer>
 
-    <!-- Modal para mostrar información de pasatiempos -->
-    <div class="modal" id="hobbyModal">
-        <div class="modal-content" id="modalContent">
-            <button class="close-modal" id="closeModal">
-                <i class="fas fa-times"></i>
-            </button>
-            <h3 id="modalTitle">Título del pasatiempo</h3>
-            <img id="modalImage" src="" alt="">
-            <p id="modalDescription">Descripción del pasatiempo.</p>
-        </div>
-    </div>
-
     <script>
-        // Cambiar entre modo claro y oscuro
+        // Protección contra inspección de elementos (silenciosa)
+        document.addEventListener('contextmenu', (e) => {
+            e.preventDefault();
+            return false;
+        });
+
+        // Bloquear F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U
+        document.addEventListener('keydown', (e) => {
+            // F12
+            if (e.keyCode === 123) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+I (Inspector)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 73) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+J (Consola)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 74) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+U (Ver código fuente)
+            if (e.ctrlKey && e.keyCode === 85) {
+                e.preventDefault();
+                return false;
+            }
+            // Ctrl+Shift+C (Selector de elementos)
+            if (e.ctrlKey && e.shiftKey && e.keyCode === 67) {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // Mensaje en consola para quien logre abrirla
+        console.log('%c¡Hola, curioso! 👋', 'color: #049CB3; font-size: 24px; font-weight: bold;');
+        console.log('%c¿Te gusta lo que ves?', 'color: #06D6A0; font-size: 16px;');
+        console.log('%cEncuentra el código completo en mi GitHub:', 'color: #666; font-size: 14px;');
+        console.log('%chttps://github.com/Kian-Pulache', 'color: #049CB3; font-size: 14px; font-weight: bold;');
+
+        // Theme Toggle
         const themeToggle = document.getElementById('themeToggle');
         const body = document.body;
 
         themeToggle.addEventListener('click', () => {
             body.classList.toggle('dark-mode');
             body.classList.toggle('light-mode');
-
+            
+            const icon = themeToggle.querySelector('i');
             if (body.classList.contains('dark-mode')) {
-                themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+                icon.className = 'fas fa-sun';
             } else {
-                themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+                icon.className = 'fas fa-moon';
             }
         });
 
-        // Manejar la galería de pasatiempos
-        const hobbies = document.querySelectorAll('.hobby');
-        const modal = document.getElementById('hobbyModal');
-        const modalTitle = document.getElementById('modalTitle');
-        const modalImage = document.getElementById('modalImage');
-        const modalDescription = document.getElementById('modalDescription');
-        const closeModal = document.getElementById('closeModal');
-
-        const hobbyInfo = {
-            buceo: {
-                title: 'Buceo',
-                image: 'https://via.placeholder.com/600',
-                description: 'Me encanta bucear en mis tiempos libres, explorando el mundo submarino.',
-            },
-            ciclismo: {
-                title: 'Ciclismo',
-                image: 'https://via.placeholder.com/600',
-                description: 'El ciclismo es una de mis actividades favoritas para mantenerme en forma y disfrutar de la naturaleza.',
-            },
-            programacion: {
-                title: 'Programación',
-                image: 'https://via.placeholder.com/600',
-                description: 'Me apasiona programar, ya sea para trabajo o en mis proyectos personales.',
-            },
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
         };
 
-        hobbies.forEach(hobby => {
-            hobby.addEventListener('click', () => {
-                const hobbyData = hobbyInfo[hobby.getAttribute('data-hobby')];
-                modalTitle.textContent = hobbyData.title;
-                modalImage.src = hobbyData.image;
-                modalDescription.textContent = hobbyData.description;
-                modal.style.display = 'flex';
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
             });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
         });
 
-        closeModal.addEventListener('click', () => {
-            modal.style.display = 'none';
+        // Smooth Scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
         });
     </script>
 </body>
