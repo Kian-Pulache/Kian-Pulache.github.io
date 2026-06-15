@@ -5,7 +5,7 @@
 
 // ─── ESTADO EMAIL ────────────────────────────────────────────
 let emailState = {
-  configured: False,  // true cuando el usuario carga sus credenciales EmailJS
+  configured: false,  // true cuando el usuario carga sus credenciales EmailJS
   serviceId: EMAIL_CONFIG.serviceId,
   templateId: EMAIL_CONFIG.templateId,
   publicKey: EMAIL_CONFIG.publicKey,
